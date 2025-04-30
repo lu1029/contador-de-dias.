@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contagem Regressiva</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: #f4f4f4;
+    }
+    h1 {
+      font-size: 2em;
+    }
+    input, button {
+      font-size: 1em;
+      padding: 10px;
+      margin: 10px;
+    }
+    .contador {
+      font-size: 2em;
+      color: #2c3e50;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contagem Regressiva</h1>
+  <p>Escolha uma data:</p>
+  <input type="date" id="dataAlvo">
+  <button onclick="calcular()">Calcular</button>
+
+  <div class="contador" id="resultado"></div>
+
+  <script>
+    function calcular() {
+      const dataSelecionada = new Date(document.getElementById("dataAlvo").value);
+      const hoje = new Date();
+      hoje.setHours(0,0,0,0);
+      dataSelecionada.setHours(0,0,0,0);
+
+      const diffTime = dataSelecionada - hoje;
+      const diffDias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      const resultado = document.getElementById("resultado");
+
+      if (isNaN(diffDias)) {
+        resultado.innerText = "Por favor, selecione uma data.";
+      } else if (diffDias < 0) {
+        resultado.innerText = "Essa data já passou.";
+      } else if (diffDias === 0) {
+        resultado.innerText = "É hoje!";
+      } else {
+        resultado.innerText = `Faltam ${diffDias} dias`;
+      }
+    }
+  </script>
+</body>
+</html>
